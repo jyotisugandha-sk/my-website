@@ -1,0 +1,1493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <link rel="icon" type="image/png" href="images/favicon.png">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduSpherix - Innovative School Management System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'deep-blue': '#1E3A8A',
+                        'brand-orange': '#F97316',
+                        'brand-green': '#16A34A',
+                        'brand-purple': '#6D28D9',
+                    }
+                }
+            }
+        }
+    </script>
+  
+ <style>
+.nav-btn {
+  padding: 8px 18px;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+  background-color: #f97316;   /* orange */
+  color: white;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+  transform: translateY(-2px);
+}
+
+
+h1, h2, h3 {
+  font-family: 'EB Garamond', serif;
+}
+
+        html {
+            scroll-behavior: smooth;
+        }
+        .counter {
+            transition: all 0.5s ease;
+        }
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #dfe9f3, #ffffff);
+}
+
+.section-title {
+  text-align: center;
+  margin: 30px 0;
+  font-size: 32px;
+  color: #2c3e50;
+}
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(3, 260px);
+  gap: 30px;
+  justify-content: center;
+}
+
+/* Modal Background */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+/* Modal Box */
+.modal-content {
+    background: #fff;
+    width: 350px;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    position: relative;
+    animation: popup 0.3s ease;
+}
+
+/* Header Color Area */
+.modal-header {
+    height: 120px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+/* Close Button */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+/* Animation */
+@keyframes popup {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+/* Pricing Hover Effects */
+
+.basic-card:hover {
+  box-shadow: 0 0 25px rgba(59, 130, 246, 0.6); /* Light Blue */
+  border: 2px solid #3b82f6;
+}
+
+.standard-card:hover {
+  box-shadow: 0 0 25px rgba(249, 115, 22, 0.6); /* Orange */
+  border: 2px solid #f97316;
+}
+
+.premium-card:hover {
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.6); /* Gold */
+  border: 2px solid gold;
+}
+/* Sfiyan changing card design*/
+
+/* Navbar Base */
+/* Navbar */
+.navbar {
+    background: #fff;
+    padding: 12px 30px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    position: relative; /* Sufiyan: positing*/
+    top: 0;
+    z-index: 1000;
+}
+
+/* Container */
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Logo */
+.logo {
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.logo .blue {
+    color: #1e3a8a;
+}
+
+.logo .orange {
+    color: #ff6a00;
+}
+
+/* Navigation Links */
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 25px;
+    margin: 0;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    padding: 10px 18px;
+    border-radius: 10px;
+    background: #f3f4f6;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    background: #e5e7eb;
+}
+
+/* Book Demo Button */
+.book-btn {
+    background: #ff6a00;
+    color: white;
+    padding: 12px 28px;
+    border-radius: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    transition: 0.3s;
+}
+
+.book-btn:hover {
+    background: #e65c00;
+}/* Reveal Animation */
+.reveal {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: all 1s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.animate-fadeIn {
+    animation: fadeIn 0.3s ease forwards;
+}
+
+
+/* Overlay */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0,0,0,0.5);
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 9999;
+}
+
+/* Popup box */
+.popup-box {
+    background: white;
+    width: 90%;
+    max-width: 400px;
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+    animation: popupFade 0.3s ease;
+}
+
+/* Close button */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+@keyframes popupFade {
+    from {
+        transform: translateY(40px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modules-section {
+    padding: 80px 5%;
+    background: #f4f6f9;
+    text-align: center;
+}
+
+.modules-heading {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 50px;
+    color: #1E3A8A;
+}
+
+/* Grid Layout */
+.modules-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 40px;
+}
+
+/* Card */
+.module-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    overflow: hidden;
+    position: relative;
+    transition: 0.4s;
+}
+
+.module-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+/* Top Ribbon */
+.module-top {
+    color: white;
+    font-weight: bold;
+    padding: 12px;
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+}
+
+/* Colors */
+.blue { background: linear-gradient(135deg, #3b82f6, #06b6d4); }
+.purple { background: linear-gradient(135deg, #8b5cf6, #d946ef); }
+.orange { background: linear-gradient(135deg, #f97316, #facc15); }
+.green { background: linear-gradient(135deg, #22c55e, #16a34a); }
+
+/* Content */
+.module-content {
+    padding: 25px;
+}
+
+.module-content h3 {
+    margin-bottom: 10px;
+    color: #f97316;
+}
+
+.module-content p {
+    font-size: 14px;
+    color: #555;
+}
+
+/* Center Round Icon */
+.module-icon {
+    width: 70px;
+    height: 70px;
+    margin: 20px auto 10px;
+    background: linear-gradient(135deg, #3b82f6, #06b6d4);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    color: white;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.features-section {
+    padding: 60px 20px;
+    background: #f5f6f8;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 36px;
+    color: #2c3e90;
+    margin-bottom: 40px;
+}
+
+.features-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.feature-tab {
+    background: #fff;
+    border-radius: 20px;
+    padding: 90px 20px 30px;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+
+
+.feature-tab:hover {
+    transform: translateY(-5px);
+}
+
+/* Top colored curved area */
+.feature-tab .top-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    border-radius: 20px 20px 80px 80px;
+}
+
+/* Colors */
+.orange .top-bg {
+    background: linear-gradient(45deg, #ff6a00, #ff8c42);
+}
+
+.purple .top-bg {
+    background: linear-gradient(45deg, #7b2ff7, #b06dfd);
+}
+
+.blue .top-bg {
+    background: linear-gradient(45deg, #007bff, #00c6ff);
+}
+
+/* Emoji Circle */
+.feature-tab .icon {
+    position: absolute;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%,-50%);
+    width: 80px;
+    height: 80px;
+    background: white;
+    border-radius: 50%;
+    font-size: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.feature-tab h3 {
+    margin-top: 40px;
+    font-size: 22px;
+    color: #222;
+}
+
+.feature-tab p {
+    font-size: 15px;
+    color: #555;
+    margin: 15px 0 20px;
+}
+
+/* Button */
+.feature-tab button {
+    padding: 10px 25px;
+    border: none;
+    border-radius: 25px;
+    background: #ff6a00;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.feature-tab button:hover {
+    opacity: 0.85;
+}
+
+/* Responsive */
+@media(max-width: 992px){
+    .features-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width: 600px){
+    .features-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Hamburger hidden in desktop */
+.menu-toggle {
+    display: none;
+    font-size: 26px;
+    cursor: pointer;
+}
+
+/* Mobile View */
+@media (max-width: 768px) {
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 70px;
+        right: 0;
+        background: white;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        display: none;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .nav-links li {
+        margin: 12px 0;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .book-btn {
+        width: 80%;
+        text-align: center;
+    }
+}
+.contact-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 10px;
+    background: white;
+    padding: 15px 20px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    min-width: 220px;
+
+    opacity: 0;
+    transform: translateY(-10px);
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.contact-dropdown.show {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+}
+@media (max-width: 768px) {
+    .contact-dropdown {
+        position: relative;
+        top: auto;
+        right: auto;
+        margin: 10px auto;
+        width: 90%;
+        text-align: center;
+    }
+}
+/* Floating Buttons Container */
+.floating-buttons {
+    position: fixed;
+    bottom: 20px;
+    width: 100%;
+    left: 0;
+    z-index: 999;
+    pointer-events: none;
+}
+
+/* Phone Button (Left) */
+.call-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: #22c55e;
+    color: white;
+    font-size: 28px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    pointer-events: auto;
+}
+
+/* WhatsApp Button (Right) */
+.whatsapp-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #25D366;
+    color: white;
+    font-size: 28px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    pointer-events: auto;
+}
+
+/* Hover Effect */
+.call-btn:hover,
+.whatsapp-btn:hover {
+    transform: scale(1.1);
+    transition: 0.3s;
+}
+/* Phone Button */
+.float-call {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 60px;
+    height: 60px;
+    background: #22c55e;
+    color: #fff;
+    font-size: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+    z-index: 9999;
+}
+
+/* WhatsApp Button */
+.float-whatsapp {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background: #25D366;
+    color: #fff;
+    font-size: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+    z-index: 9999;
+}
+
+/* Hover Effect */
+.float-call:hover,
+.float-whatsapp:hover {
+    transform: scale(1.1);
+    transition: 0.3s ease;
+}
+    </style>
+</head>
+<!-- Intro Animation Overlay -->
+<div id="introScreen" class="fixed inset-0 bg-white flex items-center justify-center z-[9999] transition-all duration-1000">
+    <img src="images/logo.jpeg" 
+         class="w-96 animate-pulse transition-all duration-1000"
+         id="introLogo">
+</div>
+
+<body class="bg-gray-50 text-gray-900 font-sans">
+    <!-- Sticky Navbar -->
+     
+    <nav class="sticky top-0 z-50 bg-white shadow-md lg-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <a href="#" class="text-2xl font-bold">
+                        <span class="text-deep-blue">Edu</span><span class="text-brand-orange">Spherix</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex space-x-4">
+
+
+  <a href="#home"
+     class="nav-btn">Home</a>
+
+  <a href="#features"
+     class="nav-btn">Features</a>
+
+  <a href="#modules"
+     class="nav-btn">Modules</a>
+
+  <a href="#pricing"
+     class="nav-btn">Pricing</a>
+
+ <a href="#" id="contactBtn"
+    class="nav-btn">Contact</a>
+    <div id="contactDropdown" class="contact-dropdown"> <!--Sufiyan-->
+    <p>📞 +91 1236478590</p>
+    <p>📧 justtesting2g.com</p>
+</div>
+
+</div>
+
+                <div class="flex items-center space-x-4"> <!--Sufiyan:Changing login into book demo-->
+                    <a href="#book-demo" 
+   class="bg-brand-orange text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition">
+   Book Demo
+</a>
+
+                    <div class="md:hidden">
+                        <button class="text-gray-700 focus:outline-none" id="mobile-menu-button">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="md:hidden hidden" id="mobile-menu">
+                <div class="px-2 pt-2 pb-3 space-y-1">
+                    <a href="#home" class="block text-gray-700 hover:text-deep-blue">Home</a>
+                    <a href="#features" class="block text-gray-700 hover:text-deep-blue">Features</a>
+                    <a href="#modules" class="block text-gray-700 hover:text-deep-blue">Modules</a>
+                    <a href="#pricing" class="block text-gray-700 hover:text-deep-blue">Pricing</a>
+                 <a href="#" id="contactBtnMobile" 
+   class="block text-gray-700 hover:text-deep-blue">
+   Contact
+</a>
+
+<div id="contactDropdownMobile" class="contact-dropdown">
+    <p>📞 +91 1236478590</p>
+    <p>📧 justtesting2g.com</p>
+</div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="bg-gradient-to-br from-indigo-600 via-purple-600 to-blue-600 text-white py-20">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6">Innovative Digital Solution for Modern Schools</h1>
+                <p class="text-lg md:text-xl mb-8">Streamline school operations with our comprehensive management system. Enhance efficiency, improve communication, and scale effortlessly for schools of all sizes.</p>
+                <a href="#bookDemo" 
+   class="inline-block bg-orange-500 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-orange-600 transition duration-300">
+   Request Free Demo
+</a>
+            </div>
+	<div class="md:w-1/2 mt-3 md:mt-0">
+    <img 
+    id="heroImage"
+    src="images/logo.jpeg"
+    alt="EduSpherix Logo"
+    class="w-72 md:w-96 h-auto mx-auto rounded-lg shadow-lg"
+>
+</div>
+
+      
+
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="py-20 bg-white reveal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-10 text-deep-blue">About EduSpherix</h2>
+            <p class="text-lg text-center max-w-3xl mx-auto">EduSpherix is a cutting-edge School Management System designed to automate and digitize school operations. From seamless parent communication to scalable infrastructure, we empower educational institutions to focus on what matters most – nurturing young minds. Our cloud-based platform ensures security, ease of use, and affordability, making it ideal for Indian schools.</p>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+            <section id="features" class="py-5 bg-gray-100 reveal">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-center mb-10 text-deep-blue">Key Features</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <!-- Feature 1 -->
+            <div class="feature-tab orange">
+                <div class="top-bg"></div>
+                <div class="icon">🎓</div>
+                <h3>Student Management</h3>
+                <p>Comprehensive student profiles with easy enrollment and tracking.</p>
+                           </div>
+
+            <!-- Feature 2 -->
+            <div class="feature-tab purple">
+                <div class="top-bg"></div>
+                <div class="icon">📅</div>
+                <h3>Attendance Tracking</h3>
+                <p>Real-time attendance monitoring with automated reports.</p>
+                            </div>
+
+            <!-- Feature 3 -->
+            <div class="feature-tab blue">
+                <div class="top-bg"></div>
+                <div class="icon">👨‍👩‍👧</div>
+                <h3>Parent Portal</h3>
+                <p>Direct communication channel for parents.</p>
+                            </div>
+
+            <!-- Feature 4 -->
+            <div class="feature-tab orange">
+                <div class="top-bg"></div>
+                <div class="icon">📊</div>
+                <h3>Marks & Reports</h3>
+                <p>Generate academic reports and analytics.</p>
+                            </div>
+
+            <!-- Feature 5 -->
+            <div class="feature-tab purple">
+                <div class="top-bg"></div>
+                <div class="icon">💳</div>
+                <h3>Fees Management</h3>
+                <p>Streamlined fee collection and tracking.</p>
+                          </div>
+
+            <!-- Feature 6 -->
+            <div class="feature-tab blue">
+                <div class="top-bg"></div>
+                <div class="icon">🚌</div>
+                <h3>Transport</h3>
+                <p>Manage transport routes and holidays.</p>
+                            </div>
+
+        </div>
+    </div>
+</section>
+<!-- Modules Section -->
+    <section id="modules" class="py-20 bg-gray-100 reveal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-10 text-deep-blue">Our Modules</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="module-card">
+      <div class="module-top blue">STEP 01</div>
+      <div class="module-content">
+        <h3>Dashboard</h3>
+        <p>The dashboard provides a centralized overview of all school activities in real time. It displays key information such as student strength, attendance status, fee summaries, and recent updates. This helps administrators and staff quickly monitor operations and make informed decisions efficiently.</p>
+
+        <div class="module-icon">📊</div>
+      </div>
+    </div>
+<div class="module-card">
+      <div class="module-top purple">STEP 02</div>
+      <div class="module-content">
+        <h3>Teacher Module</h3>
+        <p>The Teacher Module helps educators manage their daily academic activities efficiently. It allows teachers to mark attendance, update student performance, manage timetables, and share assignments or announcements. This ensures smooth classroom management and better communication with students and administration.</p>
+
+        <div class="module-icon">👩‍🏫</div>
+      </div>
+    </div>               <div class="module-card">
+      <div class="module-top orange">STEP 03</div>
+      <div class="module-content">
+        <h3>Student Module</h3>
+        <p>The Student Module provides a complete view of academic and personal information in one place. Students can check their attendance, timetable, assignments, exam results, and important announcements easily.</p>
+
+        <div class="module-icon">👨‍🎓</div>
+      </div>
+    </div>
+
+              <div class="module-card">
+      <div class="module-top green">STEP 04</div>
+      <div class="module-content">
+        <h3>Attendance</h3>
+        <p>The Attendance Module enables quick and accurate tracking of daily student attendance. It provides real-time records, absentee reports, and attendance summaries for better monitoring.</p>
+
+        <div class="module-icon">📅</div>
+      </div>
+    </div>
+
+             <div class="module-card">
+      <div class="module-top blue">STEP 05</div>
+      <div class="module-content">
+        <h3>Time Table</h3>
+        <p>The Timetable Module helps schools organize and manage class schedules efficiently. It provides a clear view of subject timings, teacher allocations, and daily routines for students and staff.</p>
+
+        <div class="module-icon">⏰</div>
+      </div>
+    </div>
+                             <div class="module-card">
+      <div class="module-top purple">STEP 06</div>
+      <div class="module-content">
+        <h3>Marks</h3>
+        <p>The Marks Module allows teachers to enter and manage student exam scores quickly and accurately. It generates detailed report cards, performance analysis, and progress summaries.</p>
+
+        <div class="module-icon">📝</div>
+      </div>
+    </div>
+
+               <div class="module-card">
+      <div class="module-top orange">STEP 07</div>
+      <div class="module-content">
+        <h3>Fees</h3>
+        <p>The Fees Module helps schools manage fee collection and payment records efficiently. It tracks paid and pending fees, generates receipts, and provides clear financial reports. This ensures transparency, reduces manual work, and keeps parents informed about payment status..</p>
+
+        <div class="module-icon">💳</div>
+      </div>
+    </div>
+<div class="module-card">
+      <div class="module-top green">STEP 08</div>
+      <div class="module-content">
+        <h3>Bus Service</h3>
+        <p>The Transport Module helps schools manage student transportation safely and efficiently. It maintains bus routes, vehicle details, driver information, and student allocations.</p>
+
+        <div class="module-icon">🚌</div>
+      </div>
+    </div>                           </div>
+        </div>
+    </section>
+
+    <!-- Animated Stats Counter Section -->
+    <section class="py-20 bg-gradient-to-r from-brand-green to-deep-blue text-white">
+	
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold mb-10">Our Impact</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <div class="text-5xl font-bold counter" data-target="15">0</div>
+                    <p class="text-xl mt-4">Modules</p>
+                </div>
+                <div>
+                    <div class="text-5xl font-bold counter" data-target="1000">0</div>
+                    <p class="text-xl mt-4">Student Capacity</p>
+                </div>
+              <div class="text-center">
+    <h2 class="text-6xl font-bold">
+        <span class="counter" data-target="24">0</span>
+        <span class="text-6xl">/7</span>
+    </h2>
+    <p class="mt-2">Support</p>
+</div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+<section class="py-5 reveal">
+
+    <h2 id="whyHeading" class="text-center text-4xl font-bold mb-16  text-deep-blue">
+        Why Choose EduSpherix?
+    </h2>
+
+    <!-- Emoji Row -->
+    <div id="emojiRow"
+         class="flex justify-around text-6xl
+                transform -translate-y-38 opacity-0
+                transition-all duration-1000 ease-out">
+
+            </div>
+
+</section>
+
+                                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="text-6xl text-brand-green mb-4">🔒</div>
+                    <h3 class="text-xl font-semibold mb-2">Security</h3>
+                    <p>Top-tier data protection and compliance.</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-6xl text-brand-purple mb-4">👩🏻‍💻</div>
+                    <h3 class="text-xl font-semibold mb-2">Digital system</h3>
+                    <p>Accessible from anywhere, anytime.</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-6xl text-brand-orange mb-4">👌</div>
+                    <h3 class="text-xl font-semibold mb-2">Easy to Use</h3>
+                    <p>Intuitive interface for all users.</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-6xl text-deep-blue mb-4">💰</div>
+                    <h3 class="text-xl font-semibold mb-2">Affordable</h3>
+                    <p>Tailored pricing for Indian schools.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+     <section id="pricing" class="py-10 bg-gray-100 relative">
+    <section class="py-20 bg-gray-100 reveal">
+  <div class="max-w-6xl mx-auto px-6">
+
+    <!-- Heading -->
+    <h2 class="text-4xl font-bold text-center text-blue-900 mb-16">
+      Pricing Plans
+    </h2>
+
+    <!-- Pricing Cards -->
+    <div class="grid md:grid-cols-3 gap-8">
+
+      <div class="pricing-card basic-card backdrop-blur-xl bg-white/70 border border-white/40 rounded-2xl shadow-xl overflow-hidden relative transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+
+    <!-- Tag -->
+    <div class="absolute top-4 left-4 bg-blue-600 text-white text-xs px-3 py-1 rounded-full">
+        Limited Offer
+    </div>
+
+    <!-- Header -->
+    <div class="bg-blue-500/50 text-black text-center py-6">
+        <h2 class="text-4xl font-bold">₹2100</h2>
+        <p class="text-sm">/month</p>
+        <h3 class="text-xl font-semibold mt-2">BASIC</h3>
+    </div>
+
+    <!-- Body -->
+    <div class="p-6">
+        <ul class="space-y-3 mt-4 text-sm">
+
+            <li class="flex items-center">
+                <span class="text-blue-600 mr-2">✔</span>
+                Student Management
+            </li>
+
+            <li class="flex items-center">
+                <span class="text-blue-600 mr-2">✔</span>
+                Teacher Management
+            </li>
+
+            <li class="flex items-center text-gray-400">
+                <span class="text-red-400 mr-2">✖</span>
+                Attendance Tracking
+            </li>
+
+            <li class="flex items-center text-gray-400">
+                <span class="text-red-400 mr-2">✖</span>
+                Fee Management
+            </li>
+
+            <li class="flex items-center text-gray-400">
+                <span class="text-red-400 mr-2">✖</span>
+                Bus Management
+            </li>
+
+        </ul>
+
+     <button class="choosePlanBtn bg-blue-600 text-white px-6 py-2 rounded-lg w-full mt-6 hover:bg-blue-700 transition"
+data-plan="Basic"
+data-color="#dbeafe">
+Choose Plan
+</button>
+
+    </div>
+</div>
+
+      <!-- Standard Plan (Highlighted) --> <!--Sufiyan adding standard-card and each-->
+     <div class="pricing-card standard-card backdrop-blur-xl bg-white/70 border border-white/40 rounded-2xl shadow-xl overflow-hidden relative transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+
+    <!-- Tag -->
+    <div class="absolute top-4 left-4 bg-orange-600 text-white text-xs px-3 py-1 rounded-full">
+        Popular Offer
+    </div>
+
+    <!-- Header -->
+    <div class="bg-orange-500/50 text-black text-center py-6">
+        <h2 class="text-4xl font-bold">₹2500</h2>
+        <p class="text-sm">/year</p>
+        <h3 class="text-xl font-semibold mt-2">STANDARD</h3>
+    </div>
+
+    <!-- Body -->
+    <div class="p-6">
+        <ul class="space-y-3 mt-4 text-sm">
+
+            <li class="flex items-center">
+                <span class="text-orange-600 mr-2">✔</span>
+                Student Management
+            </li>
+
+            <li class="flex items-center">
+                <span class="text-orange-600 mr-2">✔</span>
+                Teacher Management
+            </li>
+
+            <li class="flex items-center">
+                <span class="text-orange-600 mr-2">✔</span>
+                Attendance Tracking
+            </li>
+
+            <li class="flex items-center">
+                <span class="text-orange-600 mr-2">✔</span>
+                Fee Management
+            </li>
+
+            <li class="flex items-center text-gray-400">
+                <span class="text-red-400 mr-2">✖</span>
+                Bus Management
+            </li>
+
+        </ul>
+
+       <button class="choosePlanBtn bg-orange-600 text-white px-6 py-2 rounded-lg w-full mt-6 hover:bg-orange-700 transition"
+data-plan="Standard"
+data-color="#ffedd5">
+Choose Plan
+</button>
+    </div>
+</div>
+
+      <!-- Premium Plan -->
+      <div class="pricing-card premium-card backdrop-blur-xl bg-white/70 border border-white/40 rounded-2xl shadow-xl overflow-hidden relative transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+
+    <!-- Tag -->
+    <div class="absolute top-4 left-4 bg-yellow-600 text-white text-xs px-3 py-1 rounded-full">
+        Limited
+    </div>
+
+    <!-- Header -->
+    <div class="bg-yellow-500/50 text-black text-center py-6">
+        <h2 class="text-4xl font-bold">Custom</h2>
+        <p class="text-sm">/year</p>
+        <h3 class="text-xl font-semibold mt-2">PREMIUM</h3>
+    </div>
+
+    <!-- Body -->
+    <div class="p-6">
+        <ul class="space-y-3 mt-4 text-sm">
+
+            <li class="flex items-center">
+                <span class="text-yellow-600 mr-2">✔</span>
+                Student Management
+            </li>
+
+            <li class="flex items-center">
+                <span class="text-yellow-600 mr-2">✔</span>
+                Teacher Management
+            </li>
+
+            <li class="flex items-center">
+                <span class="text-yellow-600 mr-2">✔</span>
+                Attendance Tracking
+            </li>
+
+            <li class="flex items-center">
+                <span class="text-yellow-600 mr-2">✔</span>
+                Fee Management
+            </li>
+
+            <li class="flex items-center">
+                <span class="text-yellow-600 mr-2">✔</span>
+                Bus Management
+            </li>
+
+            <li class="flex items-center">
+                <span class="text-yellow-600 mr-2">✔</span>
+                Parent Portal Access
+            </li>
+
+        </ul>
+
+        <button class="choosePlanBtn bg-yellow-600 text-white px-6 py-2 rounded-lg w-full mt-6 hover:bg-yellow-700 transition"
+data-plan="Premium"
+data-color="#fef9c3">
+Choose Plan
+</button>
+    </div>
+</div>
+
+    </div>
+  </div>
+<!-- Popup Overlay -->
+<!-- Pricing Popup -->
+<div id="planPopup"
+     class="absolute inset-0 flex items-center justify-center bg-black/40 z-50"
+     style="display:none;">
+
+  <div id="popupContent"
+       class="bg-white rounded-xl shadow-2xl p-6 w-[90%] max-w-md relative animate-fadeIn">
+
+    <!-- Close Button -->
+    <button id="closePopup"
+            class="absolute top-3 right-3 text-xl font-bold">
+      ✕
+    </button>
+
+    <h2 id="popupTitle" class="text-2xl font-bold mb-4"></h2>
+
+    <div id="popupBody" class="text-gray-700"></div>
+
+  </div>
+</div>
+</section>
+
+
+<!-- Click Selection Script -->
+
+
+
+    <!-- Book demo section --> <!--Sufiyan:changing entire conatct to google form-->
+<section id="bookDemo"class="py-10 ">
+    <section id="contact" class="py-10 bg-gray-100 reveal"> 
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> <!--Sufiyan: changing in form-->
+           <!-- Book Demo Section -->
+<section id="book-demo" class="py-20 bg-white scroll-mt-24">
+  <div class="max-w-3xl mx-auto">
+    <h2 class="text-3xl font-bold text-center mb-8 text-deep-blue">Book Your Free Demo</h2>
+    <div class="flex justify-center">
+      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdg-CX9E36h6bfsKEQZzqpbvsD9ckiai0kbxWx1IfUbn-btSg/viewform?embedded=true" width="640" height="992" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+    </div>
+  </div>
+</section>
+
+    <footer class="bg-blue-900 text-white py-6">
+  <div class="max-w-6xl mx-auto px-6 text-center">
+
+    <!-- Brand -->
+    <h2 class="text-2xl font-semibold mb-2">EduSpherix</h2>
+    <p class="text-sm mb-3">Innovative School Management</p>
+
+    <!-- Date & Time -->
+    <p id="dateTime" class="text-sm font-medium"></p>
+
+    <!-- Copyright -->
+    <p class="text-xs mt-3 text-gray-300">
+      © 2026 EduSpherix. All Rights Reserved.
+    </p>
+
+  </div>
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const counters = document.querySelectorAll(".counter");
+
+    counters.forEach(counter => {
+        const target = +counter.getAttribute("data-target");
+        let count = 0;
+        const speed = 20;
+
+        const updateCounter = () => {
+            const increment = target / 100;
+            count += increment;
+
+            if (count < target) {
+                counter.innerText = Math.ceil(count);
+                setTimeout(updateCounter, speed);
+            } else {
+                counter.innerText = target;
+            }
+        };
+
+        updateCounter();
+    });
+});
+</script>
+
+<script>
+window.addEventListener("load", function () {
+    const image = document.getElementById("heroImage");
+
+    // Make image fullscreen immediately
+    image.classList.add("fullscreen");
+
+    // After 2 seconds, return to original position
+    setTimeout(() => {
+        image.classList.remove("fullscreen");
+    }, 2000);
+});
+</script>
+
+
+<script>
+window.addEventListener("load", function () {
+    const intro = document.getElementById("introScreen");
+    const logo = document.getElementById("introLogo");
+
+    setTimeout(() => {
+        logo.classList.add("scale-50", "opacity-0");
+        intro.classList.add("opacity-0");
+
+        setTimeout(() => {
+            intro.style.display = "none";
+        }, 1000);
+
+    }, 2000);
+});
+</script>
+<script>
+const emojiRow = document.getElementById("emojiRow");
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            emojiRow.classList.remove("-translate-y-40", "opacity-0");
+            emojiRow.classList.add("translate-y-0", "opacity-100");
+        }
+    });
+}, { threshold: 0.3 });
+
+observer.observe(emojiRow);
+</script>
+
+<script>
+function updateDateTime() {
+  const now = new Date();
+
+  const options = { 
+    weekday: 'long', 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric' 
+  };
+
+  const date = now.toLocaleDateString('en-IN', options);
+  const time = now.toLocaleTimeString('en-IN');
+
+  document.getElementById("dateTime").innerHTML =
+    date + " | " + time;
+}
+
+setInterval(updateDateTime, 1000);
+updateDateTime();
+</script>
+<script>
+function openModal(title, desc, bg) {
+    document.getElementById("featureModal").style.display = "flex";
+    document.getElementById("modalTitle").innerText = title;
+    document.getElementById("modalDesc").innerText = desc;
+    document.getElementById("modalHeader").style.background = bg;
+}
+
+function closeModal() {
+    document.getElementById("featureModal").style.display = "none";
+}
+
+/* Close when clicking outside */
+window.onclick = function(e) {
+    let modal = document.getElementById("featureModal");
+    if (e.target === modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+
+<!-- Popup Modal -->
+<div id="featureModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        
+        <div id="modalHeader" class="modal-header">
+            <div id="modalIcon" class="modal-icon"></div>
+        </div>
+
+        <h2 id="modalTitle"></h2>
+        <p id="modalDesc"></p>
+    </div>
+</div>
+<script>
+function toggleMenu() {
+    document.getElementById("navMenu").classList.toggle("active");
+}
+</script>
+<script>
+const reveals = document.querySelectorAll(".reveal");
+
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("active");
+    }
+  });
+}, { threshold: 0.2 });
+
+reveals.forEach(el => {
+  revealObserver.observe(el);
+});
+</script>
+
+<!-- Popup Overlay -->
+<div id="planPopup"
+     class="fixed top-0 left-0 w-full h-full bg-black/50 z-[9999]"
+     style="display:none;">
+
+  <div id="popupContent"
+       class="bg-white rounded-xl shadow-2xl p-6 w-[90%] max-w-md relative"
+       style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%);">
+
+    <!-- Close Button -->
+    <button id="closePopup"
+            class="absolute top-3 right-3 text-xl font-bold">
+      ✕
+    </button>
+
+    <h2 id="popupTitle" class="text-2xl font-bold mb-4"></h2>
+
+    <div id="popupBody" class="text-gray-700"></div>
+
+  </div>
+</div>
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  const buttons = document.querySelectorAll(".choosePlanBtn");
+  const popup = document.getElementById("planPopup");
+  const popupContent = document.getElementById("popupContent");
+  const popupTitle = document.getElementById("popupTitle");
+  const popupBody = document.getElementById("popupBody");
+  const closeBtn = document.getElementById("closePopup");
+
+  const planDetails = {
+    Basic: `
+      ₹2100 / month<br>
+      ✔ Student Management<br>
+      ✔ Teacher Management<br>
+      ✖ Attendance Tracking<br>
+      ✖ Fee Management<br>
+      ✖ Bus Management
+    `,
+    Standard: `
+      ₹2500 / year<br>
+      ✔ Student Management<br>
+      ✔ Teacher Management<br>
+      ✔ Attendance Tracking<br>
+      ✔ Fee Management<br>
+      ✖ Bus Management
+    `,
+    Premium: `
+      Custom / year<br>
+      ✔ All Features Included
+	✔
+Teacher Management
+✔
+Attendance Tracking
+✔
+Fee Management
+✔
+Bus Management
+✔
+Parent Portal Access
+    `
+  };
+
+  buttons.forEach(button => {
+    button.addEventListener("click", () => {
+      const plan = button.dataset.plan;
+      const color = button.dataset.color;
+
+      popup.style.display = "flex";   // show popup
+      popupContent.style.background = color;
+      popupTitle.innerText = plan + " Plan";
+      popupBody.innerHTML = planDetails[plan];
+    });
+  });
+
+  closeBtn.addEventListener("click", () => {
+    popup.style.display = "none";
+  });
+
+  popup.addEventListener("click", (e) => {
+    if (e.target === popup) {
+      popup.style.display = "none";
+    }
+  });
+
+});
+</script>
+<script>
+document.getElementById("menu-toggle").onclick = function() {
+    document.getElementById("nav-links").classList.toggle("active");
+};
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const menuBtn = document.getElementById("mobile-menu-button");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    menuBtn.addEventListener("click", function () {
+        mobileMenu.classList.toggle("hidden");
+    });
+});
+</script>
+<script>
+const contactBtn = document.getElementById("contactBtn");
+const contactBtnMobile = document.getElementById("contactBtnMobile");
+
+const contactDropdown = document.getElementById("contactDropdown");
+const contactDropdownMobile = document.getElementById("contactDropdownMobile");
+
+function toggleDropdown(e, dropdown) {
+    e.preventDefault();
+    dropdown.classList.toggle("show");
+}
+
+if (contactBtn) {
+    contactBtn.addEventListener("click", (e) => {
+        toggleDropdown(e, contactDropdown);
+    });
+}
+
+if (contactBtnMobile) {
+    contactBtnMobile.addEventListener("click", (e) => {
+        toggleDropdown(e, contactDropdownMobile);
+    });
+}
+</script>
+<!-- Floating Buttons -->
+<!-- Floating Contact Buttons (Global) -->
+<a href="tel:+9190214 91065" class="float-call" title="Call Us">
+    📞
+</a>
+
+<a href="https://wa.me/9190214 91065?text=Hello%20I%20want%20a%20demo%20of%20EduSpherix"
+   class="float-whatsapp"
+   target="_blank"
+   title="WhatsApp">
+    💬
+</a></div>
+</body>
+</html>
